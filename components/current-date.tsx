@@ -1,0 +1,14 @@
+function formatCurrentDate() {
+  return new Intl.DateTimeFormat('pt-BR', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date()).replace(/^./, (letter) => letter.toUpperCase())
+}
+
+export function CurrentDate() {
+  const date = formatCurrentDate()
+
+  return <span aria-label={`Data de hoje: ${date}`} suppressHydrationWarning>{date}</span>
+}
