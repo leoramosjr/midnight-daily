@@ -44,7 +44,14 @@ export function EditorialShell({ children }: { children: ReactNode }) {
           </nav>
 
           <details className="mobile-nav">
-            <summary aria-label="Abrir menu">Menu</summary>
+            <summary>
+              <span className="sr-only">Abrir menu</span>
+              <span className="hamburger-icon" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+            </summary>
             <nav aria-label="Principal">
               {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
               <Link href="/busca">Buscar matérias</Link>
