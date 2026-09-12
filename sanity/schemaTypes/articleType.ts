@@ -41,7 +41,15 @@ export const articleType = defineType({
           validation: (rule) => rule.required(),
         }),
         defineField({ name: 'caption', title: 'Legenda', type: 'string' }),
-      ], validation: (rule) => rule.required(),
+      ], validation: (rule) => rule.custom((value, context) => {
+        if (value || (context.document as { legacyImport?: boolean } | undefined)?.legacyImport) return true
+        return 'Adicione uma imagem de capa.'
+      }),
+    }),
+    defineField({
+      name: 'legacyImport', title: 'Matéria importada', type: 'boolean',
+      description: 'Identifica textos vindos do acervo anterior, ainda sem uma capa migrada.',
+      readOnly: true,
     }),
     defineField({ name: 'author', title: 'Autor', type: 'string', initialValue: 'R. R. Cardoso', validation: (rule) => rule.required() }),
     defineField({ name: 'publishedAt', title: 'Data de publicação', type: 'datetime', validation: (rule) => rule.required() }),
@@ -74,6 +82,10 @@ export const articleType = defineType({
       ], validation: (rule) => rule.required(),
     }),
     defineField({ name: 'seoDescription', title: 'Descrição para mecanismos de busca', type: 'text', rows: 3, validation: (rule) => rule.max(160) }),
+    defineField({
+      name: 'legacySourceUrl', title: 'Origem da matéria', type: 'url',
+      description: 'Link preservado do acervo anterior no Google Sites.', readOnly: true,
+    }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'category', media: 'coverImage' },
