@@ -1,6 +1,11 @@
 import {getCliClient} from 'sanity/cli'
 
 const site = 'https://sites.google.com/view/midnightdaily'
+const featuredDocumentIds = new Set([
+  'legacy-ainda-que-ele-me-mate',
+  'legacy-dois-homens-em-um-hospicio',
+  'legacy-estrangeiros-dentro-da-propria-mente',
+])
 
 const articles = [
   ['filmes', 'filmes/blade-runner-humanidade-em-prazo-de-validade'],
@@ -80,7 +85,7 @@ async function sourceToDocument(category, path) {
     author: 'R. R. Cardoso',
     publishedAt,
     readingTimeMinutes: Math.max(1, Math.ceil(words / 200)),
-    featured: false,
+    featured: featuredDocumentIds.has(`legacy-${slug}`),
     body: paragraphs.map(block),
     seoDescription: firstEssayParagraph.slice(0, 160),
     legacyImport: true,
@@ -99,7 +104,7 @@ const client = getCliClient({apiVersion: '2026-09-11'})
 const transaction = docs.reduce((tx, doc) => tx.createIfNotExists(doc), client.transaction())
 await transaction.commit()
 await Promise.all(docs.map((doc) => client.patch(doc._id)
-  .set({legacyImport: true})
+  .set({legacyImport: true, featured: featuredDocumentIds.has(doc._id)})
   .unset(['legacyCoverUrl', 'legacyCoverAlt'])
   .commit()))
 console.log(`${docs.length} matérias importadas com sucesso.`)
