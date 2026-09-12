@@ -22,24 +22,30 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const article = await sanityClient.fetch<Article | null>(articleBySlugQuery, { slug }, { next: { revalidate: 60 } })
   if (!article) notFound()
   const related = await sanityClient.fetch<ArticlePreview[]>(articlesByCategoryQuery, { category: article.category }, { next: { revalidate: 60 } })
+  const articleHeading = (
+    <>
+      <p className="article-category">{categoryNames[article.category] || article.category}</p>
+      <h1>{article.title}</h1>
+      {article.workTitle && <p className="article-work">{article.workTitle}</p>}
+      {article.subtitle && <p className="article-subtitle">{article.subtitle}</p>}
+      <p className="article-byline">Por {article.author || 'R. R. Cardoso'} · {dateLabel(article.publishedAt)}{article.readingTimeMinutes ? ` · ${article.readingTimeMinutes} min de leitura` : ''}</p>
+    </>
+  )
 
   return (
     <EditorialShell>
       <main className="article-page">
-        <header className="article-header page-width">
-          <p className="article-category">{categoryNames[article.category] || article.category}</p>
-          <h1>{article.title}</h1>
-          {article.workTitle && <p className="article-work">{article.workTitle}</p>}
-          {article.subtitle && <p className="article-subtitle">{article.subtitle}</p>}
-          <p className="article-byline">Por {article.author || 'R. R. Cardoso'} · {dateLabel(article.publishedAt)}{article.readingTimeMinutes ? ` · ${article.readingTimeMinutes} min de leitura` : ''}</p>
-        </header>
         {article.coverImageUrl && (
-          <figure className="article-cover page-width">
-            {/* Cover photos are Sanity-managed and paired with alt text in the schema. */}
-            <img src={article.coverImageUrl} alt={article.coverImageAlt || ''} />
-            {article.coverImageCaption && <figcaption>{article.coverImageCaption}</figcaption>}
-          </figure>
+          <section className="article-hero">
+            <figure className="article-hero-cover">
+              {/* Cover photos are Sanity-managed and paired with alt text in the schema. */}
+              <img src={article.coverImageUrl} alt={article.coverImageAlt || ''} />
+              {article.coverImageCaption && <figcaption>{article.coverImageCaption}</figcaption>}
+            </figure>
+            <header className="article-header article-hero-header page-width">{articleHeading}</header>
+          </section>
         )}
+        {!article.coverImageUrl && <header className="article-header page-width">{articleHeading}</header>}
         <article className="article-body">
           {article.body ? <PortableText value={article.body} /> : <p>{article.excerpt}</p>}
         </article>

@@ -22,16 +22,18 @@ async function getFeaturedArticles(): Promise<ArticlePreview[]> {
 function LeadArticle({ article }: { article: ArticlePreview }) {
   return (
     <article className="lead-article">
-      {article.coverImageUrl && (
-        <Link href={`/materia/${article.slug}`} tabIndex={-1}>
-          {/* Sanity provides the editorial image and its author-provided alt text. */}
+      <Link className="lead-article-link" href={`/materia/${article.slug}`}>
+        {/* Sanity provides the editorial image and its author-provided alt text. */}
+        {article.coverImageUrl && (
           <img src={article.coverImageUrl} alt={article.coverImageAlt || ''} />
-        </Link>
-      )}
-      <p className="article-category">{article.category}</p>
-      <h1><Link href={`/materia/${article.slug}`}>{article.title}</Link></h1>
-      <p className="lead-excerpt">{article.excerpt}</p>
-      <p className="article-reading">{article.author || 'R. R. Cardoso'}{article.readingTimeMinutes ? ` · ${article.readingTimeMinutes} min de leitura` : ''}</p>
+        )}
+        <div className="lead-article-content">
+          <p className="article-category">{article.category}</p>
+          <h1>{article.title}</h1>
+          <p className="lead-excerpt">{article.excerpt}</p>
+          <p className="article-reading">{article.author || 'R. R. Cardoso'}{article.readingTimeMinutes ? ` · ${article.readingTimeMinutes} min de leitura` : ''}</p>
+        </div>
+      </Link>
     </article>
   )
 }
