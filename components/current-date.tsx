@@ -10,5 +10,5 @@ function formatCurrentDate() {
 export function CurrentDate() {
   const date = formatCurrentDate()
 
-  return <span aria-label={`Data de hoje: ${date}`} suppressHydrationWarning>{date}</span>
+  return <span className="edition-date" aria-label={`Data de hoje: ${date}`} suppressHydrationWarning>{date}</span>
 }
