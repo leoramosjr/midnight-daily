@@ -31,20 +31,6 @@ export function EditorialShell({ children }: { children: ReactNode }) {
             <span>Edição da madrugada</span>
             <span className="edition-location">Rio Grande do Sul · depois da meia-noite</span>
             <CurrentDate />
-            <details className="mobile-nav">
-              <summary>
-                <span className="sr-only">Abrir menu</span>
-                <span className="hamburger-icon" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </span>
-              </summary>
-              <nav aria-label="Principal">
-                {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
-                <Link href="/busca">Buscar matérias</Link>
-              </nav>
-            </details>
           </div>
 
           <div className="masthead-brand">
@@ -56,6 +42,21 @@ export function EditorialShell({ children }: { children: ReactNode }) {
             {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
             <Link className="search-link" href="/busca" aria-label="Buscar matérias"><SearchIcon /></Link>
           </nav>
+
+          <details className="mobile-nav">
+            <summary>
+              <span className="sr-only">Abrir menu</span>
+              <span className="hamburger-icon" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+            </summary>
+            <nav aria-label="Principal">
+              {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+              <Link href="/busca">Buscar matérias</Link>
+            </nav>
+          </details>
 
         </div>
       </header>
