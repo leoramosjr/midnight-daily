@@ -1,4 +1,7 @@
 import { EditorialShell } from '@/components/editorial-shell'
+import Image from 'next/image'
+
+import host from '@/src/assets/host.png'
 
 export default function AboutPage() {
   return (
@@ -9,11 +12,16 @@ export default function AboutPage() {
           <h1>Um jornal para depois da meia-noite.</h1>
           <p className="about-lead">O Midnight Daily é um caderno cultural independente para quem ainda encontra tempo para olhar uma obra de perto.</p>
         </header>
-        <div className="about-copy">
-          <p>Filmes, livros, quadrinhos e jogos não aparecem aqui como uma corrida por novidades. São pontos de partida para observar história, política, identidade, fé, ética e as pequenas inquietações que ficam depois do fim.</p>
-          <p>Este é um espaço de leitura lenta: sem notas, rankings, publicidade agressiva ou distrações que disputem atenção com o texto.</p>
-          <h2>R. R. Cardoso</h2>
-          <p>Autor e anfitrião do Midnight Daily. A publicação nasce do desejo de manter uma conversa cultural íntima, crítica e generosa — como uma redação acesa quando a cidade já diminuiu o volume.</p>
+        <div className="about-content">
+          <figure className="about-host">
+            <Image src={host} alt="R. R. Cardoso, autor e anfitrião do Midnight Daily" />
+          </figure>
+          <div className="about-copy">
+            <p>Filmes, livros, quadrinhos e jogos não aparecem aqui como uma corrida por novidades. São pontos de partida para observar história, política, identidade, fé, ética e as pequenas inquietações que ficam depois do fim.</p>
+            <p>Este é um espaço de leitura lenta: sem notas, rankings, publicidade agressiva ou distrações que disputem atenção com o texto.</p>
+            <h2>R. R. Cardoso</h2>
+            <p>Autor e anfitrião do Midnight Daily. A publicação nasce do desejo de manter uma conversa cultural íntima, crítica e generosa — como uma redação acesa quando a cidade já diminuiu o volume.</p>
+          </div>
         </div>
       </main>
     </EditorialShell>
