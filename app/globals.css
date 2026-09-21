@@ -48,6 +48,7 @@
 .about-copy { margin-left: 0; }
 .mobile-nav-bar { display: none; }
 .desktop-nav-bar { background: var(--night); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
+.article-hero-cover img { filter: blur(.45rem); transform: scale(1.03); }
 .manifesto { padding: 2.5rem 0; }.manifesto-branding { align-items: center; align-self: start; display: flex; flex-direction: column; text-align: center; }.manifesto-logo { opacity: .86; width: min(100%, 13.5rem); }.manifesto-logo img { height: auto; width: 100%; }
 
 @media (min-width: 42.0625rem) { .masthead { border-bottom: 0; } }
