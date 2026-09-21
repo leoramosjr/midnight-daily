@@ -28,26 +28,32 @@ function SearchIcon() {
 export function EditorialShell({ children }: { children: ReactNode }) {
   return (
     <div className="editorial-shell">
+      <div className="mobile-nav-bar">
+        <div className="page-width">
+          <span className="mobile-edition-label">Edição da madrugada</span>
+          <details className="mobile-nav">
+            <summary>
+              <span className="sr-only">Abrir menu</span>
+              <span className="hamburger-icon" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+            </summary>
+            <nav aria-label="Principal">
+              {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+              <Link href="/busca">Buscar matérias</Link>
+            </nav>
+          </details>
+        </div>
+      </div>
+
       <header className="masthead">
         <div className="page-width">
           <div className="edition-line">
             <span>Edição da madrugada</span>
             <span className="edition-location">Rio Grande do Sul · depois da meia-noite</span>
             <CurrentDate />
-            <details className="mobile-nav">
-              <summary>
-                <span className="sr-only">Abrir menu</span>
-                <span className="hamburger-icon" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </span>
-              </summary>
-              <nav aria-label="Principal">
-                {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
-                <Link href="/busca">Buscar matérias</Link>
-              </nav>
-            </details>
           </div>
 
           <div className="masthead-brand bg-image-midnight-daily">
@@ -56,14 +62,15 @@ export function EditorialShell({ children }: { children: ReactNode }) {
             </Link>
             <p>Análises culturais para quem lê após a meia-noite.</p>
           </div>
-
-          <nav className="main-nav" aria-label="Principal">
-            {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
-            <Link className="search-link" href="/busca" aria-label="Buscar matérias"><SearchIcon /></Link>
-          </nav>
-
         </div>
       </header>
+
+      <div className="desktop-nav-bar">
+        <nav className="main-nav page-width" aria-label="Principal">
+          {navigation.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+          <Link className="search-link" href="/busca" aria-label="Buscar matérias"><SearchIcon /></Link>
+        </nav>
+      </div>
 
       {children}
 
