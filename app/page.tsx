@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import Link from 'next/link'
 
+import midnightDailyLogoDark from '@/src/assets/midnightdailyLogoDrak.png'
 import { ArticleCard, type ArticlePreview } from '@/components/article-card'
 import { EditorialShell } from '@/components/editorial-shell'
 import { isSanityConfigured, sanityClient } from '@/sanity/lib/client'
@@ -58,7 +60,11 @@ export default async function HomePage() {
             </section>
 
             <section className="manifesto" aria-labelledby="manifesto-title">
-              <p className="section-label">O Midnight Daily</p>
+              <div className="manifesto-branding">
+                <div className="manifesto-logo" aria-hidden="true">
+                  <Image src={midnightDailyLogoDark} alt="" />
+                </div>
+              </div>
               <div>
                 <h2 id="manifesto-title">Leia sem pressa.</h2>
                 <p>Um jornal cultural independente para obras, ideias e noites que pedem mais do que uma resposta rápida.</p>

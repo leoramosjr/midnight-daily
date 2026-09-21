@@ -1,5 +1,8 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { ReactNode } from 'react'
+
+import midnightDailyLogoDark from '@/src/assets/midnightdailyLogoDrak.png'
 
 import { CurrentDate } from '@/components/current-date'
 
@@ -47,8 +50,10 @@ export function EditorialShell({ children }: { children: ReactNode }) {
             </details>
           </div>
 
-          <div className="masthead-brand">
-            <Link href="/">Midnight Daily</Link>
+          <div className="masthead-brand bg-image-midnight-daily">
+            <Link className="masthead-logo" href="/" aria-label="Midnight Daily — início">
+              <Image src={midnightDailyLogoDark} alt="Midnight Daily" priority />
+            </Link>
             <p>Análises culturais para quem lê após a meia-noite.</p>
           </div>
 
